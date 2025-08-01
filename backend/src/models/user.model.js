@@ -4,7 +4,7 @@ const userSchema=new mongoose.Schema({
     name:{type:String,required:true},
     email:{type:String,required:true,unique:true},
     password:{type:String,required:true},
-    profilPic:{type:String,default:""},
+    profilPic:{type:String,default:"../assets/defaultprofile.png"},
     followers: [
     {
       type: mongoose.Schema.Types.ObjectId,
