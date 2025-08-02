@@ -7,7 +7,7 @@ function SignUp() {
 
 ">
       <form className="form lg:w-1/3">
-        <h1 className="heading">Login</h1> <br />
+        <h1 className="heading">Create Account</h1> <br />
         <label className="label" htmlFor="name">Enter your name:</label>
         <br />
         <input
@@ -34,9 +34,9 @@ function SignUp() {
           id="password"
           placeholder="Enter your password"
         />
-        <br />
-        <button className="form-button">Login</button> <br />
-        <p>Don't have An Account? SignUp</p>
+        <br /><br />
+        <button className="form-button">Login</button> <br /> <br />
+        <p className="form-p">Already have An Account? Login</p>
       </form>
     </div>
   );

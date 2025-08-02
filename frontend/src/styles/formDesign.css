@@ -18,3 +18,5 @@
 .heading{@apply
 text-4xl text-center
 }
+
+.form-p{@apply text-center}
