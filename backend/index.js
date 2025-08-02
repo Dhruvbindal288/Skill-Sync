@@ -1,26 +1,29 @@
-const dotenv=require("dotenv")
-const express=require("express")
-dotenv.config()
-const app=express()
-const PORT=process.env.PORT
-const connectDb=require('./src/lib/database_initiated.js')
-const path=require('path')
-const cors=require('cors')
-const cokkieparser=require('cookie-parser')
+import dotenv from "dotenv";
+import express from "express";
+import path from "path";
+import cors from "cors";
+import cookieParser from "cookie-parser";
 
+import connectDb from './src/lib/database_initiated.js';
+import AuthRouter from './src/routes/auth.route.js';
+
+dotenv.config();
+
+const app = express();
+const PORT = process.env.PORT || 5000;
+
+
+// Middleware
 app.use(express.json());
-app.use(cors({credentials:true}))   
-app.use('/assets', express.static(__dirname,'/assets'))
+app.use(cors({ credentials: true, origin: process.env.CLIENT_URL }));
+app.use(cookieParser());
 
 
+// Routes
+app.use('/api/auth', AuthRouter);
 
-
-
-
-
-
-//SERVER STARTED
-app.listen(PORT,()=>{
-    console.log("App successfully running")
-    connectDb()
+// Server
+app.listen(PORT, () => {
+  console.log(`App successfully running on port ${PORT}`);
+  connectDb();
 });
