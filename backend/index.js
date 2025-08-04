@@ -13,13 +13,12 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 
-// Middleware
 app.use(express.json());
-app.use(cors({ credentials: true, origin: process.env.CLIENT_URL }));
+app.use(cors({ credentials: true, origin: process.env.CLIENT_URL  || 'http://localhost:5173' }));
 app.use(cookieParser());
 
 
-// Routes
+
 app.use('/api/auth', AuthRouter);
 
 // Server

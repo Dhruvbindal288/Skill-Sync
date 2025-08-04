@@ -1,21 +1,24 @@
-/* eslint-disable no-unused-labels */
-/* eslint-disable no-unused-vars */
-import zustand from 'zustand';
+// store/useAuthStore.js
+
+import { create } from 'zustand';
 import { axiosInstance } from '../lib/axios_init';
 
+const useAuthStore = create((set) => ({
+  user: null,
+  loading: false,
+  
 
-export const useauthStore=zustand.create((set)=>({
-user:null,
-userSignup:async(res)=>{
+  userSignup: async (formData) => {
+    set({ loading: true });
     try {
-        const response=await axiosInstance.post('/signup',res)
-        set({user:response.data.user})
+      const response = await axiosInstance.post('/auth/signup', formData);
+      set({ user: response.data.user, loading: false });
     } catch (error) {
-        console.log("Error in signin user--frontend",error.message)
-        res.status(200).json({message:'Internal Server Error'})
+      console.error("Error in signup user -- frontend", error.message);
+      set({loading:false})
+     
     }
-}
-
-
-
+  }
 }));
+
+export default useAuthStore;
