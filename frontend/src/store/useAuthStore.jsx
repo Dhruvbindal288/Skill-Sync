@@ -20,7 +20,24 @@ const useAuthStore = create((set) => ({
       set({loading:false})
      toast.error(error.response?.data?.message || "Signup failed. Try again.");
     }
-  }
+  },
+
+  loginUser: async(formdata) => {
+   set({loading:true})
+    try {
+      const response=await axiosInstance.post('/auth/login',formdata);
+      set({user:response.data.user,loading:false});
+      toast.success('Login successfully')
+    } catch (error) {
+      console.log("error in loginUser--frontend",error.response?.data?.message);
+      set({loading:false})
+      toast.error(error.response?.data?.message || "Login failed. Try again.");
+    }
+   }
+
+
+
+
 }));
 
 export default useAuthStore;
