@@ -1,8 +1,8 @@
-/* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 import "../styles/formDesign.css";
 import useAuthStore from'../store/useAuthStore'
 import { toast } from 'react-toastify';
+
 function SignUp() {
   const {userSignup,loading}=useAuthStore();
   const [formData,setformData]=useState({
