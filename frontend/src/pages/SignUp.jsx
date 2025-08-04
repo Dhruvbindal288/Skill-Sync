@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import "../styles/formDesign.css";
 import useAuthStore from'../store/useAuthStore'
+import { toast } from 'react-toastify';
 function SignUp() {
   const {userSignup,loading}=useAuthStore();
   const [formData,setformData]=useState({
@@ -13,7 +14,7 @@ function SignUp() {
 
 const validateForm=()=>{
 if (!formData.name || !formData.email || !formData.password) {
-      alert("All fields are required");
+      toast.warn("Please fill all the fields");
       return false;
     }
     return true;

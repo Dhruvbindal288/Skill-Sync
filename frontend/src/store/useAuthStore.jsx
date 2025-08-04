@@ -2,7 +2,7 @@
 
 import { create } from 'zustand';
 import { axiosInstance } from '../lib/axios_init';
-
+import { toast } from 'react-toastify';
 const useAuthStore = create((set) => ({
   user: null,
   loading: false,
@@ -13,10 +13,12 @@ const useAuthStore = create((set) => ({
     try {
       const response = await axiosInstance.post('/auth/signup', formData);
       set({ user: response.data.user, loading: false });
-    } catch (error) {
-      console.error("Error in signup user -- frontend", error.message);
+     toast.success('Account created')
+}
+ catch (error) {
+      console.error("Error in signup user -- frontend", error.response?.data?.message)
       set({loading:false})
-     
+     toast.error(error.response?.data?.message || "Signup failed. Try again.");
     }
   }
 }));
