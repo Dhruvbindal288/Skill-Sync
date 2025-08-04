@@ -1,21 +1,15 @@
 import React from "react";
 import "../styles/formDesign.css";
 
-function SignUp() {
+function Login() {
   return (
     <div className="flex justify-center items-center min-h-screen bg-gradient-to-r from-blue-200 to-sky-300
 
 ">
       <form className="form lg:w-1/3">
-        <h1 className="heading">Create Account</h1> <br />
-        <label className="label" htmlFor="name">Enter your name:</label>
-        <br />
-        <input
-          className="input-field"
-          type="text"
-          id="name"
-          placeholder="Enter your name"
-        />{" "}
+        <h1 className="heading">Login</h1> <br />
+        
+    
         <br />
         <label className="label" htmlFor="email">Enter your email:</label>
         <br />
@@ -35,11 +29,11 @@ function SignUp() {
           placeholder="Enter your password"
         />
         <br /><br />
-        <button className="form-button">SignUp</button> <br /> <br />
-        <p className="form-p">Already have An Account? Login</p>
+        <button className="form-button">Login</button> <br /> <br />
+        <p className="form-p">Don't have An Account? Login</p>
       </form>
     </div>
   );
 }
 
-export default SignUp;
+export default Login;
