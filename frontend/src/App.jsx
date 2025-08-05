@@ -6,7 +6,9 @@ import 'react-toastify/dist/ReactToastify.css';
 import {Routes,Route} from 'react-router-dom';
 import Homepage from './pages/Homepage';
 import useAuthStore from './store/useAuthStore'; 
-import Navbar from './components/Navbar'
+import Navbar from './components/Navbar';
+import Aboutus from './pages/Aboutus';
+import Footer from './components/Footer';
 function App() {
  const {checkAuth,loading,user}=useAuthStore();
  useEffect(()=>{
@@ -19,13 +21,16 @@ function App() {
  }
   return (
     <div className='h-screen'>
-      
+      <Navbar></Navbar>
       <Routes>
 <Route path='/' element={<Homepage/>}/>
+<Route path='/aboutus' element={<Aboutus/>}/>
 <Route path='/signup' element={user?<Homepage/>:<SignUp/>}/>
 <Route path='/login' element={ user?<Homepage/>:<Login/>}/>
 </Routes>
-      
+      <Footer>
+        
+      </Footer>
      
       <ToastContainer />
     </div>
