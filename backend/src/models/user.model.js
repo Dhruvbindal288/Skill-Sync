@@ -1,28 +1,33 @@
+import mongoose from "mongoose";
 
-import mongoose from 'mongoose';
-
-const userSchema=new mongoose.Schema({
-    name:{type:String,required:true},
-    email:{type:String,required:true,unique:true},
-    password:{type:String,required:true},
-    profilPic:{type:String,default:"../assets/defaultprofile.png"},
+const userSchema = new mongoose.Schema(
+  {
+    name: { type: String, required: true },
+    email: { type: String, required: true, unique: true },
+    password: { type: String, required: true },
+    profilPic: { type: String, default: "../assets/defaultprofile.png" },
     followers: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'User'
-    }
-  ],
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+      },
+    ],
 
-  following: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'User'
-    }
-  ],  
+    following: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+      },
+    ],
 
-},{timestamps:true})
+    want_to_learn: [{ type: mongoose.Schema.Types.ObjectId, ref: "Skill" }],
+    want_to_teach: [{ type: mongoose.Schema.Types.ObjectId, ref: "Skill" }],
+  },
+
+
+  { timestamps: true }
+);
 
 const User = mongoose.model("Users", userSchema);
 
-  
 export default User;
