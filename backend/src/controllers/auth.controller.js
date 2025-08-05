@@ -106,3 +106,11 @@ export const logoutUser = (req, res) => {
   res.status(200).json({ message: "Logged out successfully" });
 };
 
+
+export const checkAuth=async(req,res)=>{
+  try {
+    res.status(200).json({user:req.user,success: true})
+  } catch (error) {
+    console.log("error in checkAuth:",error,message)
+  }
+}

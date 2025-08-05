@@ -7,7 +7,17 @@ const useAuthStore = create((set) => ({
   user: null,
   loading: false,
   
-
+checkAuth:async()=>{
+  try {
+    set({loading:true})
+    const res= await axiosInstance.get('/auth/check')
+    set({user:res.data.user})
+  } catch (error) {
+    set({user:null});
+    toast.error("User is Not logged in");
+    console.log("error in checkAuth:",error.response?.data?.message)
+  }finally{set({loading:false})}
+},
   userSignup: async (formData) => {
     set({ loading: true });
     try {
@@ -17,9 +27,9 @@ const useAuthStore = create((set) => ({
 }
  catch (error) {
       console.error("Error in signup user -- frontend", error.response?.data?.message)
-      set({loading:false})
+     
      toast.error(error.response?.data?.message || "Signup failed. Try again.");
-    }
+    }finally{ set({loading:false})}
   },
 
   loginUser: async(formdata) => {
@@ -30,9 +40,9 @@ const useAuthStore = create((set) => ({
       toast.success('Login successfully')
     } catch (error) {
       console.log("error in loginUser--frontend",error.response?.data?.message);
-      set({loading:false})
+      
       toast.error(error.response?.data?.message || "Login failed. Try again.");
-    }
+    }finally{ set({loading:false})}
    }
 
 
