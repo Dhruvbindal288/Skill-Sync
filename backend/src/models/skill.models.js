@@ -10,6 +10,6 @@ category: {
 
 });
 
-const Skill=mongoose.model("Skills",skillSchemal);
+const Skill=mongoose.model("Skills",skillSchema);
 
 export default Skill;
