@@ -6,6 +6,7 @@ const userSchema = new mongoose.Schema(
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
     profilPic: { type: String, default: "../assets/defaultprofile.png" },
+    bio:{type:String,required:true},
     followers: [
       {
         type: mongoose.Schema.Types.ObjectId,
