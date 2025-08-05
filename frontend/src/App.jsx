@@ -19,10 +19,10 @@ function App() {
  }
   return (
     <div className='h-screen'>
-      <Navbar/>
+      
       <Routes>
 <Route path='/' element={<Homepage/>}/>
-<Route path='/signup' element={<SignUp/>}/>
+<Route path='/signup' element={user?<Homepage/>:<SignUp/>}/>
 <Route path='/login' element={ user?<Homepage/>:<Login/>}/>
 </Routes>
       

@@ -1,72 +1,103 @@
 import React, { useState } from "react";
-import "../styles/formDesign.css";
-import useAuthStore from'../store/useAuthStore'
-import { toast } from 'react-toastify';
+import useAuthStore from "../store/useAuthStore";
+import { toast } from "react-toastify";
 
 function SignUp() {
-  const {userSignup,loading}=useAuthStore();
-  const [formData,setformData]=useState({
-    name:'',
-    email:'',
-    password:''
+  const { userSignup, loading } = useAuthStore();
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: "",
   });
 
-
-const validateForm=()=>{
-if (!formData.name || !formData.email || !formData.password) {
+  const validateForm = () => {
+    if (!formData.name || !formData.email || !formData.password) {
       toast.warn("Please fill all the fields");
       return false;
     }
     return true;
-}
+  };
 
-  const handleSubmit=(e)=>{
-    e.preventDefault()
-    const success=validateForm()
-    if(success===true)userSignup(formData)
-  }
-  
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (validateForm()) userSignup(formData);
+  };
+
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gradient-to-r from-blue-200 to-sky-300
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-50 to-blue-100 px-4">
+      <form
+        onSubmit={handleSubmit}
+        className="bg-white w-full max-w-md shadow-xl p-8 rounded-2xl"
+      >
+        <h2 className="text-4xl font-bold text-blue-700 mb-8 text-center">
+          Sign Up to SkillSync
+        </h2>
 
-">
-      <form className="form lg:w-1/3"  onSubmit={handleSubmit}>
-        <h1 className="heading">Create Account</h1> <br />
-        <label className="label" htmlFor="name">Enter your name:</label>
-        <br />
+        {/* Name Field */}
+        <label className="block text-gray-700 font-medium mb-1" htmlFor="name">
+          Full Name
+        </label>
         <input
-          className="input-field"
-          type="text"
           id="name"
-          placeholder="Enter your name"
-value={formData.name}
-onChange={(e)=>{setformData({...formData,name:e.target.value})}}
-        />
-        <br />
-        <label className="label" htmlFor="email">Enter your email:</label>
-        <br />
-        <input
-          className="input-field"
           type="text"
+          placeholder="John Doe"
+          value={formData.name}
+          onChange={(e) =>
+            setFormData({ ...formData, name: e.target.value })
+          }
+          className="w-full p-3 mb-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+        />
+
+        {/* Email Field */}
+        <label
+          className="block text-gray-700 font-medium mb-1"
+          htmlFor="email"
+        >
+          Email Address
+        </label>
+        <input
           id="email"
-          placeholder="Enter your email"
+          type="email"
+          placeholder="john@example.com"
           value={formData.email}
-onChange={(e)=>{setformData({...formData,email:e.target.value})}}
+          onChange={(e) =>
+            setFormData({ ...formData, email: e.target.value })
+          }
+          className="w-full p-3 mb-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
         />
-        <br />
-        <label className="label" htmlFor="password">Enter your password:</label>
-        <br />
+
+        {/* Password Field */}
+        <label
+          className="block text-gray-700 font-medium mb-1"
+          htmlFor="password"
+        >
+          Password
+        </label>
         <input
-          className="input-field"
-          type="text"
           id="password"
-          placeholder="Enter your password"
+          type="password"
+          placeholder="••••••••"
           value={formData.password}
-onChange={(e)=>{setformData({...formData,password:e.target.value})}}
+          onChange={(e) =>
+            setFormData({ ...formData, password: e.target.value })
+          }
+          className="w-full p-3 mb-6 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
         />
-        <br /><br />
-        <button className="form-button" >{loading?"Creating Account...":"SignUp"}</button> <br /> <br />
-        <p className="form-p">Already have An Account? Login</p>
+
+        {/* Submit Button */}
+        <button
+          type="submit"
+          className="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition"
+        >
+          {loading ? "Creating Account..." : "Sign Up"}
+        </button>
+
+        <p className="text-center mt-4 text-sm text-gray-600">
+          Already have an account?{" "}
+          <span className="text-blue-600 hover:underline cursor-pointer">
+            Login
+          </span>
+        </p>
       </form>
     </div>
   );
