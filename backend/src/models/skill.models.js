@@ -8,7 +8,7 @@ const skillSchema = new mongoose.Schema({
     required: true,
   },
 });
-
+ 
 const Skill = mongoose.model("Skills", skillSchema);
 
-export default Skill;
+export default Skill; 
