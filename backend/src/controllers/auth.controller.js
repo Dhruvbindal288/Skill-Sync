@@ -1,7 +1,7 @@
 import User from "../models/user.model.js";
 import bcrypt from "bcryptjs";
 import jwttoken from "jsonwebtoken";
-
+import cloudinary from '../lib/cloudinary.js'
 
 export const signUpuser = async (req, res) => {
   const { name, email, password } = req.body;
@@ -114,3 +114,65 @@ export const checkAuth=async(req,res)=>{
     console.log("error in checkAuth:",error,message)
   }
 }
+
+
+export const updateProfile=async(req,res)=>{
+let {profilePic}=req.body;
+try {
+if(!profilePic) return res.status(400).json({message:"Please select profilepic"})
+  let userid=req.user.id
+
+ const uploadResponse= await cloudinary.uploader.upload(profilePic);
+
+ const updateduser=await User.findByIdAndUpdate(userid,{profilePic:uploadResponse.secure_url},{new:true});
+res.status(200).json(updateduser)
+
+} catch (error) {
+  console.log("Error in updateProfile",error.message);
+  res.status(500).json({message:"Internal server error "})
+}
+}
+
+
+export const completeprofile = async (req, res) => {
+  const userId = req.user.id;
+  let { want_to_teach, want_to_learn } = req.body;
+
+  try {
+  
+    if (!want_to_learn || !want_to_teach) {
+      return res.status(400).json({ message: 'Please enter both fields: want_to_learn and want_to_teach' });
+    }
+
+    if (!Array.isArray(want_to_learn) || !Array.isArray(want_to_teach)) {
+      return res.status(400).json({ message: 'Both want_to_learn and want_to_teach must be arrays' });
+    }
+
+   
+    if (want_to_learn.length === 0 || want_to_teach.length === 0) {
+      return res.status(400).json({ message: 'Both fields must contain at least one skill' });
+    }
+
+    
+    const updateData = {
+      want_to_learn,
+      want_to_teach
+    };
+
+    
+    const updatedUser = await User.findByIdAndUpdate(
+      userId,
+      { $set: updateData },
+      { new: true }
+    );
+
+    res.status(200).json({
+      message: 'Profile updated successfully',
+      user: updatedUser
+    });
+
+  } catch (error) {
+    console.error("Error in completeProfile:", error.message);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
