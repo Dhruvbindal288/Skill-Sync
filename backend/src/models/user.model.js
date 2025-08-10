@@ -19,8 +19,18 @@ const userSchema = new mongoose.Schema(
       },
     ],
 
-    want_to_learn: [{ type: mongoose.Schema.Types.ObjectId, ref: "Skill" }],
-    want_to_teach: [{ type: mongoose.Schema.Types.ObjectId, ref: "Skill" }],
+    want_to_learn: [{ type: String, name: { type: String, required: true, unique: true },
+  category: {
+    type: String,
+    enum: ["Programming", "Design", "Language", "Soft Skills", "Marketing"],
+    required: true,
+  } }],
+   want_to_teach: [{ type: String, name: { type: String, required: true, unique: true },
+  category: {
+    type: String,
+    enum: ["Programming", "Design", "Language", "Soft Skills", "Marketing"],
+    required: true,
+  } }],
   },
 
   { timestamps: true }
