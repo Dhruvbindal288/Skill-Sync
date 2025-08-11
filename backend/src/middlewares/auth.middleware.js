@@ -11,7 +11,7 @@ try {
     const decoded=jwt.verify(token,process.env.JWT_SECRET);
     req.user = { id: decoded._id };
 const user = await User.findById(req.user.id).select('-password');
-res.status(200).json(user)   
+
 next();
 } catch (error) {
     console.log("Error in auth middleware;",error.message);
