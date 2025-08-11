@@ -167,7 +167,7 @@ export const completeprofile = async (req, res) => {
     );
 
     res.status(200).json({
-      message: 'Profile updated successfully',
+      message: 'Skills added successfully',
       user: updatedUser
     });
 
