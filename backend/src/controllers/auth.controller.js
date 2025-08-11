@@ -120,11 +120,10 @@ export const updateProfile=async(req,res)=>{
 let {profilePic}=req.body;
 try {
 if(!profilePic) return res.status(400).json({message:"Please select profilepic"})
-  let userid=req.user.id
-
+   const userId = req.user._id;
  const uploadResponse= await cloudinary.uploader.upload(profilePic);
 
- const updateduser=await User.findByIdAndUpdate(userid,{profilePic:uploadResponse.secure_url},{new:true});
+ const updateduser=await User.findByIdAndUpdate(userId,{profilePic:uploadResponse.secure_url},{new:true,select: '-password'});
 res.status(200).json(updateduser)
 
 } catch (error) {
@@ -135,7 +134,7 @@ res.status(200).json(updateduser)
 
 
 export const completeprofile = async (req, res) => {
-  const userId = req.user.id;
+  const userId = req.user._id;
   let { want_to_teach, want_to_learn } = req.body;
 
   try {
@@ -165,6 +164,8 @@ export const completeprofile = async (req, res) => {
       { $set: updateData },
       { new: true }
     );
+// console.log("req.user._id:", req.user._id.toString());
+
 
     res.status(200).json({
       message: 'Skills added successfully',
