@@ -22,3 +22,5 @@ completeprofile:async(data)=>{
 }
 
 }));
+
+export default useskillStore;
