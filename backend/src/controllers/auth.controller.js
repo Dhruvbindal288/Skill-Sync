@@ -164,7 +164,7 @@ export const completeprofile = async (req, res) => {
       { $set: updateData },
       { new: true }
     );
-// console.log("req.user._id:", req.user._id.toString());
+
 
 
     res.status(200).json({

@@ -7,7 +7,7 @@ import cookieParser from "cookie-parser";
 import connectDb from './src/lib/database_initiated.js';
 import AuthRouter from './src/routes/auth.route.js';
 import SkillRouter from './src/routes/skills.route.js'
-
+import ConnectionRequest from './src/routes/request.route.js'
 
 dotenv.config();
 
@@ -22,7 +22,8 @@ app.use(cookieParser());
 
 
 app.use('/api/auth', AuthRouter);
-app.use('/api/skills',SkillRouter)
+app.use('/api/skills',SkillRouter);
+app.use('/api/request',ConnectionRequest);
 
 // Server
 app.listen(PORT, () => {
