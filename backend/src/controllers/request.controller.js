@@ -4,13 +4,15 @@ import User from '../models/user.model.js';
 
 export const sendRequest=async(req,res)=>{
     const senderId=req.user._id;
-    const {receiverId}=req.body;
+    const {id:receiverId}=req.params;
 try {
 const receiver=await User.findById(receiverId)
 if(!receiver) return res.status(400).json({message:"Person not found"})
 
     if(senderId===receiverId) return res.status(400).json({message:"You cannot send request to yourself"})
- const existingRequest = await ConnectionRequest.findOne({
+
+
+        const existingRequest = await ConnectionRequest.findOne({
       senderId,
       receiverId
     });
@@ -18,6 +20,7 @@ if(!receiver) return res.status(400).json({message:"Person not found"})
     if (existingRequest) {
       return res.status(400).json({ message: "Request already sent" });
     }
+
 
      const request = new ConnectionRequest({
       senderId,
@@ -31,5 +34,41 @@ if(!receiver) return res.status(400).json({message:"Person not found"})
     console.log("Error in sendRequest:",error.message);
      res.status(500).json({ message: "Server error"});
 }
+
+}
+
+
+export const respondToRequest=async(req,res)=>{
+const {action}=req.body
+const{id:requestId}=req.params
+const userId=req.user._id
+
+const request=await  ConnectionRequest.findById(requestId);
+
+ if (!request) {
+      return res.status(404).json({ message: "Request not found" });
+    }
+ if (request.status !== "Pending") {
+      return res.status(400).json({ message: "This request has already been processed" });
+    }
+
+if (action === "accept") {
+      request.status = "Accepted";
+
+ await User.findByIdAndUpdate(request.senderId, {
+        $push: { connections: request.receiverId }
+      });
+      await User.findByIdAndUpdate(request.receiverId, {
+        $push: { connections: request.senderId }
+      });
+    }  else if (action === "reject") {
+      request.status = "Rejected";
+    } 
+    else {
+      return res.status(400).json({ message: "Invalid action" });
+    }
+
+    await request.save();
+    res.status(200).json({ message: `Request ${action}ed successfully`, request });
 
 }
