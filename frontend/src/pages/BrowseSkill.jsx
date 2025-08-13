@@ -1,9 +1,10 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react";
 import useskillStore from "../store/useSkillStore";
-
+import useConnectionStore from "../store/useConnectionStore";
 function BrowseSkill() {
   const { allUser } = useskillStore();
+  const {sendRequest}=useConnectionStore()
   const [user, setUser] = useState([]);
 
   useEffect(() => {
@@ -56,7 +57,9 @@ function BrowseSkill() {
                 {/* Send Request Button */}
                 <button
                   className="w-full bg-blue-500 hover:bg-blue-600 text-white py-2 rounded-lg transition"
-                  onClick={() => alert(`Request sent to ${u.name}`)}
+                  onClick={() => {
+sendRequest(u._id)
+                  }}
                 >
                   Send Request
                 </button>
