@@ -1,6 +1,35 @@
 import User from "../models/user.model.js";
 import Message from "../models/message.model.js";
 
+
+export const getMessages=async(req,res)=>{
+const senderId=req.user._id;
+const {id:receiverId}=req.params;
+try {
+    const message=await Message.findOne({
+        $or:[
+            {senderId:senderId,receiverId:receiverId},
+              {senderId:receiverId,receiverId:senderId}
+        ]
+    })
+
+    res.status(200).json(message)
+} catch (error) {
+    console.log("error in getMessages controller",error.message);
+    res.status(500).json({message:"Internal server error"})
+}
+
+}
+
+
+
+
+
+
+
+
+
+
 export const sendMessage=async(req,res)=>{
 try {
     const {message}=req.body
