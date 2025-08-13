@@ -19,8 +19,21 @@ completeprofile:async(data)=>{
         set({loading:false})
     }
    
+},
+
+allUser:async()=>{
+
+    try {
+          const res=await axiosInstance.get('/skills/getUsers')
+           return res.data;
+    } catch (error) {
+        toast.error("Failed to get user")
+    }
+  
 }
 
 }));
+
+
 
 export default useskillStore;

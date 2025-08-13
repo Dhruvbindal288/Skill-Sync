@@ -5,6 +5,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {Routes,Route} from 'react-router-dom';
 import Homepage from './pages/Homepage';
+import Brosweskill from './pages/BrowseSkill';
 import useAuthStore from './store/useAuthStore'; 
 import Navbar from './components/Navbar';
 import Aboutus from './pages/Aboutus';
@@ -27,6 +28,7 @@ function App() {
 <Route path='/aboutus' element={<Aboutus/>}/>
 <Route path='/signup' element={user?<Homepage/>:<SignUp/>}/>
 <Route path='/login' element={ user?<Homepage/>:<Login/>}/>
+<Route path='/browseSkill' element={ <Brosweskill/>}/>
 </Routes>
       <Footer>
         

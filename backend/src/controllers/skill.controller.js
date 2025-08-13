@@ -56,3 +56,19 @@ export const updateSkill = async (req, res) => {
     res.status(500).json({ message: "Internal server error" });
   }
 };
+
+
+
+
+export const allUser=async(req,res)=>{
+  try {
+    let id=req.user._id
+ const users = await User.find({ _id: { $ne: id } }).select("-password"); 
+  res.status(200).json(users);
+
+
+  } catch (error) {
+       console.error("Error in allUsers",error.message);
+    res.status(500).json({ message: "Server error" });
+  }
+}

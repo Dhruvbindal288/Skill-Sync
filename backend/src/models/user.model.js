@@ -13,8 +13,8 @@ const userSchema = new mongoose.Schema(
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
     profilePic: { type: String, default: "../assets/defaultprofile.png" },
-  
-  want_to_learn: [skillSubSchema],
+    bio:{type:String},
+    want_to_learn: [skillSubSchema],
     want_to_teach: [skillSubSchema],
     connections: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }]
   },

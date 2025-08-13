@@ -135,12 +135,12 @@ res.status(200).json(updateduser)
 
 export const completeprofile = async (req, res) => {
   const userId = req.user._id;
-  let { want_to_teach, want_to_learn } = req.body;
+  let { want_to_teach, want_to_learn,bio } = req.body;
 
   try {
   
-    if (!want_to_learn || !want_to_teach) {
-      return res.status(400).json({ message: 'Please enter both fields: want_to_learn and want_to_teach' });
+    if (!want_to_learn || !want_to_teach ||!bio) {
+      return res.status(400).json({ message: 'Please enter all fields' });
     }
 
     if (!Array.isArray(want_to_learn) || !Array.isArray(want_to_teach)) {
@@ -155,7 +155,8 @@ export const completeprofile = async (req, res) => {
     
     const updateData = {
       want_to_learn,
-      want_to_teach
+      want_to_teach,
+      bio
     };
 
     
@@ -177,3 +178,8 @@ export const completeprofile = async (req, res) => {
     res.status(500).json({ message: "Internal server error" });
   }
 };
+
+
+
+
+
