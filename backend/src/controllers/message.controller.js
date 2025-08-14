@@ -61,3 +61,24 @@ await newMessage.save();
 
  
 }
+
+
+
+export const getUserForSideBar=async(req,res)=>{
+try {
+    let userId=req.user._id;
+const users=await User.find({_id:{$ne:userId}}).select("-password")    
+const currentUser=await User.findById(userId).select("-password")
+  
+ users = users.filter(user =>
+      currentUser.connections.includes(user._id.toString())
+    );
+
+    res.status(201).json(users)
+
+
+} catch (error) {
+    console.log(error.message,": Error in getUserForSideBar" )
+    res.status(500).json({message:"Server Error"})
+}
+}

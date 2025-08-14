@@ -11,6 +11,7 @@ import useAuthStore from './store/useAuthStore';
 import Navbar from './components/Navbar';
 import Aboutus from './pages/Aboutus';
 import Footer from './components/Footer';
+import Chat from './pages/Chat';
 function App() {
  const {checkAuth,loading,user}=useAuthStore();
  useEffect(()=>{
@@ -31,6 +32,7 @@ function App() {
 <Route path='/login' element={ user?<Homepage/>:<Login/>}/>
 <Route path='/browseSkill' element={ <Brosweskill/>}/>
 <Route path='/requests' element={<Notification/>}/>
+<Route path='/chats' element={<Chat/>}/>
 </Routes>
       <Footer>
         
