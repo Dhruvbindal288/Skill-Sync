@@ -1,10 +1,12 @@
 import React from 'react'
-
+import SideBarUser from '../components/SideBarUser';
+import MessageContainer from '../components/MessageContainer';
 function Chat() {
   return (
     <div>
-      <h1>Chat Page</h1>
-// Left side where will get alluser how are connected to each other...
+
+      <SideBarUser/>
+      <MessageContainer/>
 
     </div>
   )

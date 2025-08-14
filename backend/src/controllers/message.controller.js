@@ -22,14 +22,6 @@ try {
 }
 
 
-
-
-
-
-
-
-
-
 export const sendMessage=async(req,res)=>{
 try {
     const {message}=req.body
@@ -67,7 +59,7 @@ await newMessage.save();
 export const getUserForSideBar=async(req,res)=>{
 try {
     let userId=req.user._id;
-const users=await User.find({_id:{$ne:userId}}).select("-password")    
+let users=await User.find({_id:{$ne:userId}}).select("-password")    
 const currentUser=await User.findById(userId).select("-password")
   
  users = users.filter(user =>
