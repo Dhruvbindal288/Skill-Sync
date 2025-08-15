@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import useskillStore from "../store/useSkillStore";
 import useConnectionStore from "../store/useConnectionStore";
 function BrowseSkill() {
-  const { allUser } = useskillStore();
+  const { allUser ,users} = useskillStore();
   const {sendRequest}=useConnectionStore()
   const [user, setUser] = useState([]);
 
@@ -60,8 +60,8 @@ function BrowseSkill() {
                   onClick={() => {
 sendRequest(u._id)
                   }}
-                >
-                  Send Request
+                > 
+                 Send Request
                 </button>
               </div>
             </div>

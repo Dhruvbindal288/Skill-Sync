@@ -8,8 +8,9 @@ function Navbar() {
       <ul className='flex gap-16'>
         <li className='hover:text-blue-400'><NavLink to={"/"}>Home</NavLink></li>
             <li className='hover:text-blue-400'><NavLink to={"/aboutus"}>AboutUs</NavLink></li>
-                <li className='hover:text-blue-400'><NavLink to={"/browseskill"}>BrowseSills</NavLink></li>
+                <li className='hover:text-blue-400'><NavLink to={"/browseskill"}>BrowseSkills</NavLink></li>
                  <li className='hover:text-blue-400'><NavLink to={"/chats"}>Chats</NavLink></li>
+                 <li className='hover:text-blue-400'><NavLink to={"/requests"}>Requests</NavLink></li>
 <li className='hover:text-blue-400'>Profile</li>
       </ul>
     </div>

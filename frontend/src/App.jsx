@@ -3,7 +3,7 @@ import SignUp from './pages/SignUp'
 import Login from './pages/Login'
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import {Routes,Route} from 'react-router-dom';
+import {Routes,Route,Navigate} from 'react-router-dom';
 import Homepage from './pages/Homepage';
 import Brosweskill from './pages/BrowseSkill';
 import Notification from './pages/Notification';
@@ -25,14 +25,14 @@ function App() {
   return (
     <div className='h-screen'>
       <Navbar></Navbar>
-      <Routes>
-<Route path='/' element={<Homepage/>}/>
-<Route path='/aboutus' element={<Aboutus/>}/>
-<Route path='/signup' element={user?<Homepage/>:<SignUp/>}/>
-<Route path='/login' element={ user?<Homepage/>:<Login/>}/>
-<Route path='/browseSkill' element={ <Brosweskill/>}/>
-<Route path='/requests' element={<Notification/>}/>
-<Route path='/chats' element={<Chat/>}/>
+     <Routes>
+  <Route path="/" element={<Homepage />} />
+  <Route path="/aboutus" element={<Aboutus />} />
+  <Route path="/signup" element={user ? <Navigate to="/" /> : <SignUp />} />
+  <Route path="/login" element={user ? <Navigate to="/" /> : <Login />} />
+  <Route path="/browseSkill" element={user ? <Brosweskill /> : <Navigate to="/login" />} />
+  <Route path="/requests" element={user ? <Notification /> : <Navigate to="/login" />} />
+  <Route path="/chats" element={user ? <Chat /> : <Navigate to="/login" />} />
 </Routes>
       <Footer>
         

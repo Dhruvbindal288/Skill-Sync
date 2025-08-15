@@ -11,7 +11,7 @@ const fetchrequests= async ()=>{
 }
 },[getAllRequest]);
   return (
-    <div>
+    <div className='h-screen'>
       <h1>All Notification</h1>
       
         {requests.length >0 ? (<div>

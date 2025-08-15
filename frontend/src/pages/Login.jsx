@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import useAuthStore from "../store/useAuthStore";
 import { toast } from "react-toastify";
+import {Link} from 'react-router-dom'
 
 function Login() {
   const { loading, loginUser } = useAuthStore();
@@ -72,9 +73,9 @@ function Login() {
         </button>
 
         <p className="text-center mt-4 text-sm text-gray-700">
-          Don't have an account?{" "}
+          Don't have an account?
           <span className="text-blue-600 hover:underline cursor-pointer">
-            Sign Up
+             <Link to="/signup">SignUp</Link>
           </span>
         </p>
       </form>

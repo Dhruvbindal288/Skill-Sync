@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import useAuthStore from "../store/useAuthStore";
 import { toast } from "react-toastify";
-
+import { Link } from "react-router-dom";
 function SignUp() {
   const { userSignup, loading } = useAuthStore();
   const [formData, setFormData] = useState({
@@ -95,7 +95,7 @@ function SignUp() {
         <p className="text-center mt-4 text-sm text-gray-600">
           Already have an account?{" "}
           <span className="text-blue-600 hover:underline cursor-pointer">
-            Login
+             <Link to="/login">login</Link>
           </span>
         </p>
       </form>
