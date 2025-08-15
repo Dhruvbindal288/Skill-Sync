@@ -82,13 +82,11 @@ export const respondToRequest = async (req, res) => {
 export const getAllRequest = async (req, res) => {
   try {
     const userId = req.user._id;
-    const user = await User.findById(userId);
-    if (!user) return res.status(404).json({ message: "User not found" });
 
     const requests = await ConnectionRequest.find({
-      receiverId: userId,
-    }).populate("senderId", "name email bio profilePic");
-    if(!requests) return res.status(404).json({message:"No request"})
+      receiverId: userId,status:"Pending"
+    }).populate("senderId", "name bio profilePic");
+    if(requests.length===0) return res.status(404).json({message:"No request"})
 
     res.status(200).json(requests);
   } catch (error) {

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 
 
 import { create } from 'zustand';
@@ -43,6 +44,18 @@ checkAuth:async()=>{
       
       toast.error(error.response?.data?.message || "Login failed. Try again.");
     }finally{ set({loading:false})}
+   },
+
+   logoutuser:async()=>{
+    set({loading:true})
+    try {
+      const res=await axiosInstance.get('/auth/logout')
+      set({user:null,loading:false});
+    } catch (error) {
+      console.log("Error in logout ",error.message)
+      toast.error(error.response.data.message || "Can't Logout user..Please try again")
+      set({loading:false})
+    }
    }
 
 

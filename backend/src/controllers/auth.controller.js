@@ -187,7 +187,7 @@ export const deleteUser=async(req,res)=>{
 
     const deletedUser=await User.findByIdAndDelete(userId)
 
-    res.status(201).json({message:"User Account Deleted"});
+    res.status(201).json({message:"User Account Deleted"},deletedUser);
   } catch (error) {
     console.log("Error in deletedUsed:",error.message);
     res.status(500).json({message:"Internal Server Error"});
