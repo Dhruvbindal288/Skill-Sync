@@ -181,5 +181,16 @@ export const completeprofile = async (req, res) => {
 
 
 
+export const deleteUser=async(req,res)=>{
+  try {
+    let userId=req.user._id();
 
+    const deletedUser=await User.findByIdAndDelete(userId)
+
+    res.status(201).json({message:"User Account Deleted"});
+  } catch (error) {
+    console.log("Error in deletedUsed:",error.message);
+    res.status(500).json({message:"Internal Server Error"});
+  }
+}
 

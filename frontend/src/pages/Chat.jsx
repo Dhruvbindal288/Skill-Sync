@@ -3,7 +3,7 @@ import SideBarUser from '../components/SideBarUser';
 import MessageContainer from '../components/MessageContainer';
 function Chat() {
   return (
-    <div>
+    <div className='flex h-screen w-screen gap-14'>
 
       <SideBarUser/>
       <MessageContainer/>

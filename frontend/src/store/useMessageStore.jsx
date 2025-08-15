@@ -5,11 +5,11 @@ import { toast } from 'react-toastify';
 const useMessageStore=create((set)=>({
     sidebarUsers: [],
     messages:[],
-    selectedUser:[],
+    selectedUser:null,
     getUserForSideBar:async()=>{
         try {
             let res=await axiosInstance.get("/messages/sidebar-users")
-              set({ sidebarUsers: res.data });
+              set({ sidebarUsers: res.data ||[] });
         } catch (error) {
             toast.error(error.response?.data?.message || "Server Error")
         }
@@ -21,7 +21,8 @@ const useMessageStore=create((set)=>({
         } catch (error) {
             toast.error(error.response?.data?.message || "Server Error")
         }
-    }
+    },
+     setSelectedUser: (user) => set({ selectedUser: user })
 }));
 
 
