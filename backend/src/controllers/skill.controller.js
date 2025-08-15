@@ -1,5 +1,5 @@
 import User from "../models/user.model.js";
-
+import ConnectionRequest from "../models/connectRequest.model.js";
 export const updateSkills = async (req, res) => {
   const userId = req.user.id;
   const { want_to_learn, want_to_teach, new_skill_to_learn,new_skill_to_teach } = req.body;
@@ -63,7 +63,9 @@ export const updateSkill = async (req, res) => {
 export const allUser=async(req,res)=>{
   try {
     let id=req.user._id
- const users = await User.find({ _id: { $ne: id } }).select("-password"); 
+    const requests=await ConnectionRequest.find({ receiverId: id }).select("senderId")
+       const senderIds = requests.map(req => req.senderId);
+ const users = await User.find({ _id:  { $nin: [id, ...senderIds] } }).select("-password"); 
   res.status(200).json(users);
 
 

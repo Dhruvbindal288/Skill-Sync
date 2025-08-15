@@ -30,7 +30,14 @@ console.log( res.data.requests)
 respondToRequest:async(requestId,action)=>{
   try {
     let res=await axiosInstance.post(`/request/respond-request/${requestId}`,{action});
+    toast.success(res.data.message)
+     set((state) => ({
+      connectionRequests: state.connectionRequests.filter(
+        (req) => req._id !== requestId
+      )
+    }));
     return res.data;
+    
   } catch (error) {
     toast.error(error.response?.data?.message || "Failed to respond");
   }

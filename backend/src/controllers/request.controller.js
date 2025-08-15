@@ -63,12 +63,12 @@ export const respondToRequest = async (req, res) => {
       await User.findByIdAndUpdate(request.receiverId, {
         $push: { connections: request.senderId },
       });
+      
     } else if (action === "reject") {
       request.status = "Rejected";
     } else {
       return res.status(400).json({ message: "Invalid action" });
     }
-
     await request.save();
     res
       .status(200)
