@@ -42,7 +42,9 @@ checkAuth:async()=>{
     } catch (error) {
       console.log("error in loginUser--frontend",error.response?.data?.message);
       
-      toast.error(error.response?.data?.message || "Login failed. Try again.");
+       toast.error(
+      error?.response?.data?.message || "Login failed. Try again."
+    );
     }finally{ set({loading:false})}
    },
 

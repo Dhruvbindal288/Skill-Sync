@@ -1,35 +1,37 @@
-/* eslint-disable no-unused-vars */
-import React, { useEffect, useState } from 'react'
-import useConnectionStore from '../store/useConnectionStore'
+
+import React, { useEffect, useState } from 'react';
+import useConnectionStore from '../store/useConnectionStore';
+
 function Notification() {
-  const {getAllRequest}=useConnectionStore()
-  const [requests,setRequest]=useState([])
-useEffect(()=>{
-const fetchrequests= async ()=>{
- const data= await getAllRequest()
- setRequest(data);
-}
-},[getAllRequest]);
+  const { getAllRequest,respondToRequest } = useConnectionStore();
+  const [requests, setRequest] = useState([]);
+
+  useEffect(() => {
+    const fetchRequests = async () => {
+      const data = await getAllRequest();
+      setRequest(data);
+    };
+    fetchRequests();
+  }, [getAllRequest]);
+
   return (
     <div className='h-screen'>
-      <h1>All Notification</h1>
-      
-        {requests.length >0 ? (<div>
-{requests.map((req)=>{
-<div>
-  <h1 className="text-center text-gray-500" key={req._id}>{req.name}</h1>
-</div>
- 
- })}
-  </div> ):(<p>No request found</p>)}
-
-        
-      
+      <h1>All Notifications</h1>
+      {requests.length > 0 ? (
+        <div>
+          {requests.map((req) => (
+            <div key={req._id}>
+              <h1 className="text-center text-gray-500">{req.senderId.name}</h1>
+              <h1 className="text-center text-gray-500">{req.status}</h1>
+<button onClick={() => respondToRequest(req._id, 'accept')}>Accept</button>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <p>No request found</p>
+      )}
     </div>
-  )
+  );
 }
 
-export default Notification
-  // Home chats notifications brwoseskills profile
-
-  //Chats -----> vedio call
+export default Notification;
