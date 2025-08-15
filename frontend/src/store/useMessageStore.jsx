@@ -22,7 +22,7 @@ const useMessageStore=create((set)=>({
             toast.error(error.response?.data?.message || "Server Error")
         }
     },
-     setSelectedUser: (user) => set({ selectedUser: user })
+     
 }));
 
 

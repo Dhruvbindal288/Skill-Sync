@@ -3,7 +3,7 @@ import React from 'react'
 function MessageContainer() {
   return (
     <div>
-      <h1>message container</h1>
+      <h1>Message will be displayed here of selected user..</h1>
     </div>
   )
 }
