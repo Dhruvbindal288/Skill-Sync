@@ -10,6 +10,7 @@ const useMessageStore=create((set)=>({
         try {
             let res=await axiosInstance.get("/messages/sidebar-users")
               set({ sidebarUsers: res.data ||[] });
+
         } catch (error) {
             toast.error(error.response?.data?.message || "Server Error")
         }
@@ -22,6 +23,12 @@ const useMessageStore=create((set)=>({
             toast.error(error.response?.data?.message || "Server Error")
         }
     },
+    selectUser: async (user) => {
+    set({ selectedUser: user });  
+    if (user?._id) {
+      await useMessageStore.getState().getMessage(user._id); 
+    }
+  },    
      
 }));
 
