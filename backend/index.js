@@ -9,11 +9,12 @@ import AuthRouter from './src/routes/auth.route.js';
 import SkillRouter from './src/routes/skills.route.js'
 import ConnectionRequest from './src/routes/request.route.js'
 import MessageRouter from './src/routes/message.route.js'
+import { app,server,io } from "./src/lib/socket.js";
 
 
 dotenv.config();
 
-const app = express();
+
 const PORT = process.env.PORT || 5000;
 
 
@@ -29,7 +30,7 @@ app.use('/api/request',ConnectionRequest);
 app.use('/api/messages',MessageRouter);
 
 // Server
-app.listen(PORT, () => {
+server.listen(PORT, () => {
   console.log(`App successfully running on port ${PORT}`);
   connectDb();
 });
