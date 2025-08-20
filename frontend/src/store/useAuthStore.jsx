@@ -84,9 +84,11 @@ completeProfile:async(data)=>{
     const res=await axiosInstance.post("/auth/complete-profile",data);
     toast.success("Profile completed",);
           set({ user: res.data.user });
+          return true;
   } catch (error) {
     console.log(error.response.data.message ,"Error in complete profile frontend")
     toast.error(error.response.data.message);
+    return false;
   }finally{
      set({loading:false})
   }
