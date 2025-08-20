@@ -65,6 +65,17 @@ checkAuth:async()=>{
       set({loading:false})
     }
    },
+updateProfile:async(data)=>{
+  try {
+    const res = await axiosInstance.put('/auth/update-profile',data)
+    set({user:res.data});
+    toast.success("Profile image uploaded")
+  } catch (error) {
+    console.log("error in updateProfile",error.message)
+    toast.error(error.response.data.message)
+  }
+},
+
 connectSocket:()=>{
   const socket=io("http://localhost:5000");
   socket.connect();

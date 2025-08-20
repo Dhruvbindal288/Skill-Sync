@@ -117,9 +117,11 @@ export const checkAuth=async(req,res)=>{
 
 
 export const updateProfile=async(req,res)=>{
-let {profilePic}=req.body;
+
+
 try {
-if(!profilePic) return res.status(400).json({message:"Please select profilepic"})
+  const {profilePic}=req.body;
+if(!profilePic) return res.status(400).json({message:"Profile pic is required"})
    const userId = req.user._id;
  const uploadResponse= await cloudinary.uploader.upload(profilePic);
 
