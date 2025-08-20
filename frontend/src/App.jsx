@@ -13,6 +13,7 @@ import Aboutus from './pages/Aboutus';
 import Footer from './components/Footer';
 import Chat from './pages/Chat';
 import ProfilePage from './pages/ProfilePage';
+import Completeprofile from './pages/Completeprofile';
 function App() {
  const {checkAuth,loading,user}=useAuthStore();
  useEffect(()=>{
@@ -24,7 +25,7 @@ function App() {
   </div>
  }
   return (
-    <div className='min-h-screen'>
+    <div>
       <Navbar></Navbar>
      <Routes>
   <Route path="/" element={<Homepage />} />
@@ -35,6 +36,7 @@ function App() {
   <Route path="/requests" element={user ? <Notification /> : <Navigate to="/login" />} />
   <Route path="/chats" element={user ? <Chat /> : <Navigate to="/login" />} />
   <Route path="/profile" element={user ? <ProfilePage /> : <Navigate to="/login" />} />
+  <Route path="/complete-profile" element={user ? <Completeprofile/> : <Navigate to="/login" />} />
 </Routes>
       <Footer>
         

@@ -13,6 +13,7 @@ function Navbar() {
                  <li className='hover:text-blue-400'><NavLink to={"/requests"}>Requests</NavLink></li>
                      <li className='hover:text-blue-400'><NavLink to={"/profile"}>Profile</NavLink></li>
 
+                     <li className='hover:text-blue-400'><NavLink to={"/complete-profile"}>Complete</NavLink></li>
       </ul>
     </div>
   )

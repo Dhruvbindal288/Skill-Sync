@@ -68,11 +68,29 @@ checkAuth:async()=>{
 connectSocket:()=>{
   const socket=io("http://localhost:5000");
   socket.connect();
-  set({ socket });
+  set({ socket:socket });
 },
-disconnectSocket:()=>{}
+disconnectSocket:()=>{
+  const { socket } = get();
+  if (socket) {
+    socket.disconnect();
+    set({ socket: null });
+  }
+},
 
-
+completeProfile:async(data)=>{
+   set({loading:true})
+  try {
+    const res=await axiosInstance.post("/auth/complete-profile",data);
+    toast.success("Profile completed",);
+          set({ user: res.data.user });
+  } catch (error) {
+    console.log(error.response.data.message ,"Error in complete profile frontend")
+    toast.error(error.response.data.message);
+  }finally{
+     set({loading:false})
+  }
+}
 
 
 }));

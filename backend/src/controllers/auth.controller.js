@@ -164,7 +164,7 @@ export const completeprofile = async (req, res) => {
       userId,
       { $set: updateData },
       { new: true }
-    );
+    ).select("-password");
 
 
 
