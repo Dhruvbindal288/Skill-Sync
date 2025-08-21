@@ -4,7 +4,7 @@ import useAuthStore from '../store/useAuthStore';
 import { toast } from 'react-toastify';
 
 const ProfilePage = () => {
-  const { user, updateProfile } = useAuthStore();
+  const { user, updateProfile ,loading} = useAuthStore();
   const [selectedImage, setSelectedImage] = useState(null);
 
   
@@ -31,7 +31,7 @@ const ProfilePage = () => {
           <div className="flex flex-col items-center gap-3">
             <div className="w-32 h-32 md:w-36 md:h-36 rounded-full overflow-hidden border-4 border-blue-400 bg-gray-100 flex items-center justify-center">
               {user.profilePic ? (
-                <img src={selectedImage} alt={user.name} className="w-full h-full object-cover" />
+                <img src={user.profilePic} alt={user.name} className="w-full h-full object-cover" />
               ) : (
                 <span className="px-4 text-center text-lg font-semibold text-gray-700 leading-snug" aria-label={`${user.name} avatar fallback`}>
                   {user.name}
@@ -47,7 +47,7 @@ const ProfilePage = () => {
               className="hidden"
               onChange={handleUpload}
             />
-            <label
+            <label 
               htmlFor="profilePicInput"
               className="cursor-pointer inline-flex items-center rounded-md bg-blue-600 px-3 py-1.5 text-xs font-semibold text-white shadow-sm hover:bg-blue-700 transition"
             >

@@ -66,13 +66,16 @@ checkAuth:async()=>{
     }
    },
 updateProfile:async(data)=>{
+set({loading:true})
   try {
     const res = await axiosInstance.put('/auth/update-profile',data)
     set({user:res.data});
-    toast.success("Profile image uploaded")
+    toast.success("Profile image uploaded");
+    set({loading:false});
   } catch (error) {
     console.log("error in updateProfile",error.message)
-    toast.error(error.response.data.message)
+    toast.error(error.response.data.message||"Cant update profile right now")
+    set({loading:false});
   }
 },
 
